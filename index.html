@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp-style layout</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+}
+
+/* Left chat list */
+.sidebar {
+  width: 30%;
+  max-width: 300px;
+  background: #fff;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-list {
+  flex: 1;
+  overflow-y: auto;
+}
+.chat-item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+.chat-item:hover {
+  background: #f2f2f2;
+}
+
+/* Right chat area */
+.chat-area {
+  flex: 1;
+  background: #e5ddd5;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  background: #ededed;
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.input-area {
+  background: #f0f0f0;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  display: flex;
+}
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="chat-list">
+    <div class="chat-item" onclick="openChat('Aisha')">Aisha</div>
+    <div class="chat-item" onclick="openChat('John')">John</div>
+    <div class="chat-item" onclick="openChat('Team Chat')">Team Chat</div>
+  </div>
+</div>
+
+<div class="chat-area">
+  <div class="chat-header" id="chatName">Select a chat</div>
+  <div class="messages" id="messages">
+    <p style="color:#555;">Click a chat on the left to open conversation.</p>
+  </div>
+  <div class="input-area">
+    <input type="text" placeholder="Type a message...">
+  </div>
+</div>
+
+<script>
+function openChat(name) {
+  document.getElementById("chatName").textContent = name;
+  document.getElementById("messages").innerHTML =
+    `<p><strong>${name}:</strong> Hello there!</p>`;
+}
+</script>
+
+</body>
+</html>
