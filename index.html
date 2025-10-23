@@ -3,100 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WhatsApp-style layout</title>
+<title>MY CV</title>
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  display: flex;
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
 
-/* Left chat list */
-.sidebar {
-  width: 30%;
-  max-width: 300px;
-  background: #fff;
-  border-right: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-}
+  body {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-.chat-list {
-  flex: 1;
-  overflow-y: auto;
-}
-.chat-item {
-  padding: 15px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-}
-.chat-item:hover {
-  background: #f2f2f2;
-}
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background: #1a0155; /* HELB green */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: left 0.3s ease;
+  }
 
-/* Right chat area */
-.chat-area {
-  flex: 1;
-  background: #e5ddd5;
-  display: flex;
-  flex-direction: column;
-}
+  .nav {
+    list-style: none;
+    padding: 20px 0;
+  }
 
-.chat-header {
-  background: #ededed;
-  padding: 15px;
-  border-bottom: 1px solid #ccc;
-  font-weight: bold;
-}
+  .nav li {
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-.messages {
-  flex: 1;
-  padding: 15px;
-  overflow-y: auto;
-}
+  .nav li:hover {
+    background: rgba(255,255,255,0.1);
+  }
 
-.input-area {
-  background: #f0f0f0;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  display: flex;
-}
-.input-area input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  outline: none;
-}
+  .nav li.active {
+    background: #f9b233; /* highlight color */
+    color: #000;
+    font-weight: bold;
+  }
+
+  .bottom {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* Main Content */
+  .content {
+    flex: 1;
+    background: #f8f9fc;
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  /* Toggle Button for Small Screens */
+  .toggle-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #00723f;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  /* Section Styling */
+  .section {
+    display: none;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  footer {
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    margin-top: 40px;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 900px) {
+    body {
+      flex-direction: column;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      height: 100%;
+      z-index: 1000;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .toggle-btn {
+      display: block;
+    }
+
+    .content {
+      padding-top: 60px;
+    }
+  }
 </style>
 </head>
 <body>
 
-<div class="sidebar">
-  <div class="chat-list">
-    <div class="chat-item" onclick="openChat('Aisha')">Aisha</div>
-    <div class="chat-item" onclick="openChat('John')">John</div>
-    <div class="chat-item" onclick="openChat('Team Chat')">Team Chat</div>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul class="nav">
+      <li class="active" onclick="showSection('update', event)">Personal Details</li>
+      <li onclick="showSection('funds', event)">Education</li>
+      <li onclick="showSection('postgrad', event)">Career</li>
+      <li onclick="showSection('loans', event)">Expertise</li>
+      <li onclick="showSection('self', event)">Referees</li>
+    </ul>
+    <div class="bottom">
+      <h4>CONTACT</h4>
+      <p onclick="showSection('contact', event)" style="cursor:pointer;">📞 Contact Me</p>
+    </div>
   </div>
-</div>
 
-<div class="chat-area">
-  <div class="chat-header" id="chatName">Select a chat</div>
-  <div class="messages" id="messages">
-    <p style="color:#555;">Click a chat on the left to open conversation.</p>
+  <!-- Content -->
+  <div class="content">
+    <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
+
+    <div id="update" class="section active">
+      <h2>BACKGROUND INFORMATION</h2>
+      <p>BOAZ OCHIENG</p>
+    </div>
+
+    <div id="funds" class="section">
+      <h2>ACADEMIC QUALIFICATION</h2>
+      <p>from primary to college</p>
+    </div>
+
+    <div id="postgrad" class="section">
+      <h2>WORK EXPERIENCE</h2>
+      <p>Job info</p>
+    </div>
+
+    <div id="loans" class="section">
+      <h2>Major skilled areas</h2>
+      <p>ICT</p>
+    </div>
+
+    <div id="self" class="section">
+      <h2>REFEREES</h2>
+      <p>1, 2, ...</p>
+    </div>
+
+    <div id="contact" class="section">
+      <h2>Contact info</h2>
+      <p>Email: boazkhoinange@gmail.com</p>
+      <p>Phone: +254 700886058</p>
+    </div>
+
+    <footer>
+      Copyright © 2025 <strong>My Online Curiculum vitae</strong>. 
+    </footer>
   </div>
-  <div class="input-area">
-    <input type="text" placeholder="Type a message...">
-  </div>
-</div>
 
 <script>
-function openChat(name) {
-  document.getElementById("chatName").textContent = name;
-  document.getElementById("messages").innerHTML =
-    `<p><strong>${name}:</strong> Hello there!</p>`;
-}
+  // Switch sections
+  function showSection(id, event) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav li').forEach(li => li.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // close sidebar on small screens
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  // Toggle sidebar for small screens
+  const toggleBtn = document.getElementById('toggleBtn');
+  const sidebar = document.getElementById('sidebar');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+  });
 </script>
 
 </body>
