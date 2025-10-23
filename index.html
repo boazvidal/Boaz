@@ -16,7 +16,7 @@
   /* Sidebar */
   .sidebar {
     width: 240px;
-    background: #1a0155; /* HELB green */
+    background: url(images/royalblue.jpg); /* HELB green */
     color: white;
     display: flex;
     flex-direction: column;
@@ -53,7 +53,9 @@
   /* Main Content */
   .content {
     flex: 1;
-    background: #f8f9fc;
+    background: url(images/white1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 20px;
     overflow-y: auto;
     position: relative;
@@ -78,10 +80,11 @@
   /* Section Styling */
   .section {
     display: none;
-    background: white;
+    background: url(images/whitered.png); /*rgb(209, 70, 70);*/
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-bottom: 10px solid blue;
   }
 
   .section.active {
