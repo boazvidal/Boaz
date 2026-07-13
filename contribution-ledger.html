@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contribution Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #16232F;
+    --navy-deep: #0F1A23;
+    --paper: #F6EFDD;
+    --paper-dim: #EFE6CC;
+    --ink: #262017;
+    --ink-soft: #6B6250;
+    --rule: #D9CBA3;
+    --brass: #B8863B;
+    --brass-light: #D7A94F;
+    --green: #3F6B52;
+    --green-soft: #E4ECE3;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at top, #1E2E3C 0%, var(--navy) 45%, var(--navy-deep) 100%);
+    font-family:'Inter', sans-serif;
+    color: var(--ink);
+    padding: 40px 16px 60px;
+  }
+
+  .book{
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  /* ---- Header ---- */
+  .masthead{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:20px;
+    padding: 0 6px 22px;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    color: var(--brass-light);
+    text-transform:uppercase;
+    margin:0 0 6px;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(28px, 4vw, 42px);
+    color:#F6EFDD;
+    margin:0;
+    line-height:1.05;
+  }
+
+  .totals{
+    text-align:right;
+    color:#F6EFDD;
+  }
+
+  .totals .amount{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight:600;
+    color: var(--brass-light);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .totals .label{
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#9FB0BE;
+  }
+
+  /* ---- Tab strip (ledger index tabs) ---- */
+  .tab-strip{
+    display:flex;
+    overflow-x:auto;
+    gap:3px;
+    padding: 0 10px;
+    scrollbar-width: thin;
+  }
+  .tab-strip::-webkit-scrollbar{ height:6px; }
+  .tab-strip::-webkit-scrollbar-thumb{ background:#3A4B59; border-radius:3px; }
+
+  .tab{
+    flex: 0 0 auto;
+    position:relative;
+    cursor:pointer;
+    padding: 10px 16px 12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    color:#B9C4CC;
+    background: #223140;
+    border:none;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    transition: color .15s ease, background .15s ease, transform .15s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{ color:#F6EFDD; background:#2B3D4E; }
+  .tab.active{
+    background: var(--paper);
+    color: var(--ink);
+    transform: translateY(2px);
+    font-weight:600;
+  }
+  .tab .sub{
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-size:9.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    opacity:.65;
+    margin-top:2px;
+  }
+  .tab:focus-visible{
+    outline: 2px solid var(--brass-light);
+    outline-offset: 2px;
+  }
+
+  /* ---- Page (content panel) ---- */
+  .page{
+    background: var(--paper);
+    border-radius: 2px 10px 10px 10px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.45);
+    padding: 8px 0 4px;
+    position:relative;
+  }
+
+  .page-inner{
+    padding: 30px 34px 26px 54px;
+    position:relative;
+  }
+
+  /* binder holes */
+  .page-inner::before{
+    content:"";
+    position:absolute;
+    left:20px;
+    top:24px;
+    bottom:24px;
+    width:8px;
+    background-image: radial-gradient(circle, var(--navy-deep) 3.5px, transparent 3.6px);
+    background-size: 8px 46px;
+    background-repeat: repeat-y;
+    opacity:.35;
+  }
+
+  .fund-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:10px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom:10px;
+    margin-bottom: 6px;
+  }
+
+  .fund-title{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    font-weight:600;
+    margin:0;
+  }
+  .fund-sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color: var(--ink-soft);
+  }
+  .fund-count{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color: var(--ink-soft);
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top: 6px;
+  }
+  thead th{
+    text-align:left;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color: var(--ink-soft);
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  thead th.num{ text-align:right; }
+
+  tbody td{
+    padding: 9px 10px;
+    border-bottom: 1px dashed var(--rule);
+    font-size:14px;
+    vertical-align:middle;
+  }
+  tbody tr:hover td{ background: rgba(184,134,59,.08); }
+
+  td.idx{
+    font-family:'IBM Plex Mono', monospace;
+    color: var(--ink-soft);
+    font-size:12px;
+    width: 34px;
+  }
+  td.name{ font-weight:600; }
+  td.position{
+    color: var(--ink-soft);
+    font-size:12.5px;
+  }
+  td.position .tag{
+    background: var(--green-soft);
+    color: var(--green);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size:10.5px;
+    letter-spacing:.03em;
+    font-weight:600;
+  }
+  td.amount{
+    text-align:right;
+    font-family:'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight:600;
+  }
+
+  tfoot td{
+    padding: 12px 10px 4px;
+    border-top: 2px solid var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+  }
+  tfoot td.amount{ text-align:right; font-size:15px; color: var(--green); }
+
+  .empty{
+    padding: 36px 10px;
+    text-align:center;
+    color: var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+
+  footer{
+    text-align:center;
+    color:#6E7E8C;
+    font-size:11.5px;
+    margin-top: 22px;
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:.04em;
+  }
+
+  @media (max-width: 640px){
+    .page-inner{ padding: 24px 16px 20px 34px; }
+    .page-inner::before{ left:10px; }
+    thead{ display:none; }
+    tbody tr{ display:block; border-bottom: 1px solid var(--rule); padding: 10px 0; }
+    tbody td{ display:flex; justify-content:space-between; border:none; padding:3px 0; font-size:13.5px; }
+    td.idx{ display:none; }
+    td.name::before{ content:"Name"; font-weight:400; color:var(--ink-soft); }
+    td.position::before{ content:"Position"; color:var(--ink-soft); }
+    td.amount::before{ content:"Amount"; font-weight:400; color:var(--ink-soft); }
+    td.name, td.position, td.amount{ text-align:right; }
+  }
+</style>
+</head>
+<body>
+
+<div class="book">
+
+  <div class="masthead">
+    <div>
+      <p class="eyebrow">Group Record Book &middot; 2026</p>
+      <h1>Contribution Ledger</h1>
+    </div>
+    <div class="totals">
+      <div class="amount" id="grandTotal">KES 0</div>
+      <div class="label">Total recorded, all months</div>
+    </div>
+  </div>
+
+  <nav class="tab-strip" id="tabStrip" role="tablist" aria-label="Select month"></nav>
+
+  <div class="page">
+    <div class="page-inner">
+      <div class="fund-row">
+        <div>
+          <h2 class="fund-title" id="fundTitle">&nbsp;</h2>
+          <div class="fund-sub" id="fundSub"></div>
+        </div>
+        <div class="fund-count" id="fundCount"></div>
+      </div>
+
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th class="idx">#</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th class="num">Amount (KES)</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Subtotal</td>
+            <td class="amount" id="subtotal">0</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="empty" id="emptyState" style="display:none;">No contributions recorded for this month.</div>
+    </div>
+  </div>
+
+  <footer>Contribution Ledger &middot; click a tab above to view a month</footer>
+</div>
+
+<script>
+/* ---------------------------------------------------------
+   MONTH / FUND DEFINITIONS
+   key   -> used to look up amounts in each person's record
+   label -> shown on the tab
+   sub   -> fund / project subtitle shown under label & on page
+--------------------------------------------------------- */
+const MONTHS = [
+  { key:'jan', label:'Jan', sub:'The Great Uniform' },
+  { key:'feb', label:'Feb', sub:'' },
+  { key:'mar', label:'Mar', sub:'Uloma' },
+  { key:'mar2', label:'Mar', sub:'Insurance' },
+  { key:'apr', label:'Apr', sub:'Agoro Sare' },
+  { key:'may', label:'May', sub:'' },
+  { key:'jun', label:'Jun', sub:'Ukwala' },
+  { key:'jul', label:'Jul', sub:'Programming' },
+  { key:'rec', label:'Recording', sub:'' },
+  { key:'aug', label:'Aug', sub:'' },
+  { key:'sep', label:'Sep', sub:'' },
+  { key:'oct', label:'Oct', sub:'' },
+  { key:'nov', label:'Nov', sub:'' },
+  { key:'dec', label:'Dec', sub:'' },
+];
+
+/* ---------------------------------------------------------
+   CONTRIBUTOR DATA
+   Transcribed from the original spreadsheet. Add / edit
+   entries here — each object is { name, position, amounts }.
+--------------------------------------------------------- */
+const PEOPLE = [
+  { name:'Anjline', position:'', amounts:{ jan:1500, mar:100, mar2:260, apr:1000, jul:200 } },
+  { name:'Bather', position:'', amounts:{ mar2:260, apr:1000, jul:200 } },
+  { name:'Boaz Ochieng', position:'Secretary', amounts:{ jan:3500, mar:150, apr:1000, jun:200, jul:200, rec:5000 } },
+  { name:'Brian Oduor', position:'Asst. Director', amounts:{ jan:3500, mar:100, mar2:260, apr:1000, jun:100, jul:200 } },
+  { name:'Brighton', position:'', amounts:{ jan:500 } },
+  { name:'Damaris', position:'', amounts:{ jan:1800, mar:100, mar2:260, apr:1000, jun:50 } },
+  { name:'David', position:'', amounts:{ apr:1000, jun:50 } },
+  { name:'Desma', position:'', amounts:{ jan:2500, mar:200, mar2:260, apr:1000, jul:100 } },
+  { name:'Esther Opana', position:'Welfare', amounts:{ jan:2500, mar:100, mar2:260, apr:1000, jun:100, jul:200, rec:5000 } },
+  { name:'Florence', position:'', amounts:{ jan:2500, mar2:260, apr:1000 } },
+  { name:'Fred', position:'', amounts:{ jan:3000, jun:50 } },
+  { name:'Hilda', position:'', amounts:{ mar2:260, jul:100 } },
+  { name:'Jackline', position:'', amounts:{ jan:2500 } },
+  { name:'Janet', position:'', amounts:{ jan:2000, apr:1000 } },
+  { name:'Jay Jay', position:'', amounts:{ jan:2000 } },
+  { name:'Joshua', position:'Elder', amounts:{ jan:3500, mar:150, mar2:260, apr:1000, jun:50, rec:2000 } },
+  { name:'Judith Rawera', position:'Trainer', amounts:{ jan:1900, mar:100, mar2:260, apr:1000, jun:50, jul:200 } },
+  { name:'Lavine', position:'Uniform', amounts:{ jan:2500, mar:150, jul:300 } },
+  { name:'Lucy', position:'', amounts:{ jan:2500, mar2:600, jun:100, jul:150 } },
+  { name:'Millicent', position:'Asst. Secretary', amounts:{ jan:2500, mar:100, apr:1000, jun:50, jul:200 } },
+  { name:'Monicah Achieng', position:'Asst. Welfare', amounts:{ jan:400, mar:100, apr:700, jun:50, jul:200 } },
+  { name:'Noel Atieno', position:'Director', amounts:{ jan:2000, mar2:260, apr:1000, may:200 } },
+  { name:'Peter', position:'', amounts:{ jan:3000, apr:1000 } },
+  { name:'Rian Wasonga', position:'Trainer', amounts:{ jan:2000, mar:100, apr:700, jul:150 } },
+  { name:'Ronnie', position:'', amounts:{ jan:2300 } },
+  { name:'Ruth George', position:'', amounts:{ jun:100, jul:200, rec:2000 } },
+  { name:'Samuel Aroko', position:'Trainer', amounts:{ jan:3000, mar:50, rec:2000 } },
+  { name:'Selestine', position:'', amounts:{ jun:50 } },
+  { name:'Sheryl', position:'', amounts:{ jan:1500 } },
+  { name:'Stanley', position:'', amounts:{} },
+];
+
+/* ---------------------------------------------------------
+   RENDERING
+--------------------------------------------------------- */
+const tabStrip   = document.getElementById('tabStrip');
+const tableBody  = document.getElementById('tableBody');
+const fundTitle  = document.getElementById('fundTitle');
+const fundSub    = document.getElementById('fundSub');
+const fundCount  = document.getElementById('fundCount');
+const subtotalEl = document.getElementById('subtotal');
+const emptyState = document.getElementById('emptyState');
+const dataTable  = document.getElementById('dataTable');
+const grandTotalEl = document.getElementById('grandTotal');
+
+function money(n){
+  return n.toLocaleString('en-KE');
+}
+
+function computeGrandTotal(){
+  let total = 0;
+  PEOPLE.forEach(p => {
+    Object.values(p.amounts).forEach(v => total += v);
+  });
+  return total;
+}
+
+function buildTabs(){
+  MONTHS.forEach((m, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'tab';
+    btn.type = 'button';
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('data-key', m.key);
+    btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    btn.innerHTML = m.label + (m.sub ? `<span class="sub">${m.sub}</span>` : '');
+    btn.addEventListener('click', () => selectMonth(m.key));
+    tabStrip.appendChild(btn);
+  });
+}
+
+function selectMonth(key){
+  const month = MONTHS.find(m => m.key === key);
+  if(!month) return;
+
+  // update tab active state
+  [...tabStrip.children].forEach(tab => {
+    const active = tab.getAttribute('data-key') === key;
+    tab.classList.toggle('active', active);
+    tab.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+
+  // fund header
+  const fullMonthName = {
+    jan:'January', feb:'February', mar:'March', mar2:'March', apr:'April',
+    may:'May', jun:'June', jul:'July', rec:'Recording Fund', aug:'August',
+    sep:'September', oct:'October', nov:'November', dec:'December'
+  }[key];
+  fundTitle.textContent = fullMonthName;
+  fundSub.textContent = month.sub ? month.sub.toUpperCase() : 'General contribution';
+
+  // rows
+  const rows = PEOPLE
+    .map((p, i) => ({ ...p, idx: i + 1, value: p.amounts[key] }))
+    .filter(r => r.value !== undefined && r.value !== null);
+
+  tableBody.innerHTML = '';
+  let subtotal = 0;
+
+  if(rows.length === 0){
+    dataTable.style.display = 'none';
+    emptyState.style.display = 'block';
+  } else {
+    dataTable.style.display = 'table';
+    emptyState.style.display = 'none';
+
+    rows.forEach(r => {
+      subtotal += r.value;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="idx">${r.idx}</td>
+        <td class="name">${r.name}</td>
+        <td class="position">${r.position ? `<span class="tag">${r.position}</span>` : ''}</td>
+        <td class="amount">${money(r.value)}</td>
+      `;
+      tableBody.appendChild(tr);
+    });
+  }
+
+  fundCount.textContent = `${rows.length} contributor${rows.length === 1 ? '' : 's'}`;
+  subtotalEl.textContent = money(subtotal);
+}
+
+buildTabs();
+selectMonth(MONTHS[0].key);
+grandTotalEl.textContent = 'KES ' + money(computeGrandTotal());
+</script>
+
+</body>
+</html>
