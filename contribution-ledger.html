@@ -48,10 +48,17 @@
     padding: 0 6px 22px;
   }
 
-  .masthead img{
-    height: 48px;
-    margin-right: 12px;
-    vertical-align:middle;
+  .brand-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  .logo{
+    height:36px;
+    width:auto;
+    display:block;
   }
 
   .eyebrow{
@@ -316,8 +323,11 @@
 
   <div class="masthead">
     <div>
-      <p class="eyebrow">Group Record Book &middot; 2026</p>
-      <img src="images/sdalogo.png"> <h1>Ugunja Church Choir</h1>
+      <p class="eyebrow"> Record Book &middot; 2026</p>
+      <div class="brand-row">
+        <img src="images/sdalogo.png" alt="Logo" class="logo">
+        <h1>Contribution Ledger</h1>
+      </div>
       <p class="eyebrow">Prepared by the Secretary</p>
     </div>
     <div class="totals">
