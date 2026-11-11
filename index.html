@@ -6,12 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#102b69">
 
-<title>Boaz Ochieng | Online CV</title>
+<title>Boaz Ochieng | Professional CV</title>
 
 <style>
-/* ===============================
-   GLOBAL SETTINGS
-================================ */
+
+/* =========================================
+   1. GLOBAL SETTINGS AND THEME
+========================================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -26,7 +28,11 @@
     --white: #ffffff;
     --dark: #172033;
     --muted: #667085;
-    --glass: rgba(255,255,255,0.87);
+    --glass: rgba(255,255,255,0.88);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -34,18 +40,24 @@ body {
     display: flex;
     overflow: hidden;
     color: var(--dark);
+    background: #f1f4fa;
 }
 
-/* ===============================
-   SIDEBAR
-================================ */
+
+/* =========================================
+   2. SIDEBAR
+========================================= */
+
 .sidebar {
     width: 260px;
     min-width: 260px;
     height: 100vh;
+
     background:
-        linear-gradient(rgba(8,29,83,0.90),
-                        rgba(8,29,83,0.96)),
+        linear-gradient(
+            rgba(8,29,83,0.90),
+            rgba(8,29,83,0.96)
+        ),
         url("images/royalblue.jpg");
 
     background-size: cover;
@@ -55,13 +67,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     z-index: 1000;
     transition: transform 0.35s ease;
 }
 
+/* Profile area */
+
 .profile {
     text-align: center;
-    padding: 35px 15px 25px;
+    padding: 32px 15px 25px;
     border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
@@ -69,14 +84,19 @@ body {
     width: 85px;
     height: 85px;
     margin: auto;
+
     border-radius: 50%;
     display: grid;
     place-items: center;
+
     font-size: 30px;
     font-weight: bold;
     color: var(--royal-blue);
+
     background: linear-gradient(135deg, white, var(--gold));
+
     border: 4px solid rgba(255,255,255,0.3);
+
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
 }
 
@@ -90,31 +110,40 @@ body {
     font-size: 12px;
     color: #d5dfff;
     margin-top: 6px;
+    letter-spacing: 1px;
 }
+
+/* Navigation */
 
 .nav {
     list-style: none;
-    padding: 20px 12px;
+    padding: 18px 12px;
     flex: 1;
+    overflow-y: auto;
 }
 
 .nav li {
-    margin: 7px 0;
+    margin: 6px 0;
 }
 
 .nav button {
     width: 100%;
+
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 14px 16px;
+    gap: 14px;
+
+    padding: 13px 15px;
+
     color: #e6ebff;
     background: transparent;
     border: none;
     border-radius: 9px;
+
     font-size: 14px;
     text-align: left;
     cursor: pointer;
+
     transition: 0.3s;
 }
 
@@ -133,9 +162,11 @@ body {
 
 .nav-icon {
     font-size: 19px;
-    width: 22px;
+    width: 23px;
     text-align: center;
 }
+
+/* Sidebar contact */
 
 .sidebar-bottom {
     padding: 20px;
@@ -154,34 +185,19 @@ body {
     color: white;
     text-decoration: none;
     font-size: 13px;
-    margin: 10px 0;
+    margin: 11px 0;
+    overflow-wrap: anywhere;
 }
 
 .sidebar-bottom a:hover {
     color: var(--gold);
 }
 
-/* ===============================
-   MAIN CONTENT
-================================ */
-.content {
-    flex: 1;
-    height: 100vh;
-    overflow-y: auto;
-    padding: 35px;
-    position: relative;
 
-    background:
-        linear-gradient(rgba(255,255,255,0.30),
-                        rgba(255,255,255,0.30)),
-        url("images/white1.jpg");
+/* =========================================
+   3. MOBILE NAVIGATION
+========================================= */
 
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-/* Mobile navigation controls */
 .mobile-header {
     display: none;
 }
@@ -190,26 +206,61 @@ body {
     display: none;
 }
 
-/* ===============================
-   SECTIONS
-================================ */
+
+/* =========================================
+   4. MAIN CONTENT
+========================================= */
+
+.content {
+    flex: 1;
+    height: 100vh;
+
+    overflow-y: auto;
+    padding: 35px;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.30),
+            rgba(255,255,255,0.30)
+        ),
+        url("images/white1.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* =========================================
+   5. GENERAL SECTION DESIGN
+========================================= */
+
 .section {
     display: none;
+
     max-width: 1150px;
     margin: 0 auto;
+
     padding: 30px;
+
     border-radius: 16px;
 
     background:
-        linear-gradient(rgba(255,255,255,0.87),
-                        rgba(255,255,255,0.87)),
+        linear-gradient(
+            rgba(255,255,255,0.88),
+            rgba(255,255,255,0.88)
+        ),
         url("images/whitered.png");
 
     background-size: cover;
     background-position: center;
 
     border-bottom: 7px solid var(--blue);
+
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+
     animation: appear 0.4s ease;
 }
 
@@ -222,6 +273,7 @@ body {
         opacity: 0;
         transform: translateY(12px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -243,11 +295,14 @@ body {
 .section-heading p {
     color: var(--muted);
     font-size: 13px;
+    line-height: 1.6;
 }
 
-/* ===============================
-   PERSONAL DETAILS
-================================ */
+
+/* =========================================
+   6. PERSONAL DETAILS
+========================================= */
+
 .details-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -255,10 +310,13 @@ body {
 }
 
 .detail-card {
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.88);
+
     border: 1px solid rgba(16,43,105,0.10);
+
     padding: 19px;
     border-radius: 11px;
+
     transition: 0.3s;
 }
 
@@ -269,10 +327,13 @@ body {
 
 .detail-card span {
     display: block;
+
     font-size: 11px;
     color: var(--muted);
+
     text-transform: uppercase;
     letter-spacing: 1px;
+
     margin-bottom: 8px;
 }
 
@@ -282,43 +343,63 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* ===============================
-   EDUCATION TIMELINE
-================================ */
+
+/* =========================================
+   7. EDUCATION TIMELINE
+========================================= */
+
 .timeline {
     border-left: 3px solid var(--blue);
+
     margin-left: 10px;
     padding-left: 25px;
 }
 
 .timeline-item {
     position: relative;
-    margin-bottom: 28px;
+
+    margin-bottom: 25px;
     padding: 20px;
-    background: rgba(255,255,255,0.85);
+
+    background: rgba(255,255,255,0.88);
+
     border-radius: 10px;
+
     box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.timeline-item:last-child {
+    margin-bottom: 5px;
 }
 
 .timeline-item::before {
     content: "";
+
     position: absolute;
+
     width: 13px;
     height: 13px;
+
     border-radius: 50%;
+
     background: var(--gold);
     border: 3px solid var(--blue);
+
     left: -35px;
     top: 24px;
 }
 
 .year {
     display: inline-block;
+
     background: var(--royal-blue);
     color: white;
+
     padding: 6px 12px;
+
     font-size: 12px;
     border-radius: 20px;
+
     margin-bottom: 10px;
 }
 
@@ -334,15 +415,20 @@ body {
     color: #555;
 }
 
-/* ===============================
-   WORK EXPERIENCE
-================================ */
+
+/* =========================================
+   8. WORK EXPERIENCE
+========================================= */
+
 .job-card {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.90);
+
     padding: 23px;
     margin-bottom: 22px;
+
     border-radius: 12px;
     border-left: 5px solid var(--gold);
+
     box-shadow: 0 4px 15px rgba(0,0,0,0.07);
 }
 
@@ -375,9 +461,11 @@ body {
     color: #444;
 }
 
-/* ===============================
-   EXPERTISE / SKILLS
-================================ */
+
+/* =========================================
+   9. TECHNICAL EXPERTISE
+========================================= */
+
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -385,24 +473,31 @@ body {
 }
 
 .skill-card {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.92);
+
     padding: 17px;
     text-align: center;
+
     border-radius: 12px;
     border: 1px solid rgba(0,0,0,0.07);
+
     transition: 0.3s;
 }
 
 .skill-card:hover {
     transform: translateY(-6px);
+
     box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+
     border-color: var(--gold);
 }
 
 .skill-card img {
     width: 100%;
     height: 100px;
+
     object-fit: contain;
+
     margin-bottom: 12px;
 }
 
@@ -411,25 +506,207 @@ body {
     color: var(--royal-blue);
 }
 
-/* ===============================
-   REFEREES
-================================ */
-.referee-card {
+.skill-icon {
+    height: 100px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 55px;
+    margin-bottom: 12px;
+}
+
+/* Skill proficiency */
+
+.skill-progress {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.skill-progress span {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--royal-blue);
+}
+
+.progress-track {
+    height: 9px;
+
+    background: #dce3ed;
+
+    border-radius: 20px;
+    overflow: hidden;
+
+    margin-top: 7px;
+}
+
+.progress-fill {
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #0752a5,
+        #078bd1
+    );
+
+    border-radius: 20px;
+
+    animation: grow 1.2s ease;
+}
+
+@keyframes grow {
+    from {
+        width: 0;
+    }
+}
+
+
+/* =========================================
+   10. LANGUAGES
+========================================= */
+
+.language-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.language-card {
     background: rgba(255,255,255,0.9);
+
+    padding: 30px 15px;
+
+    border-radius: 12px;
+    text-align: center;
+
+    border-bottom: 4px solid var(--gold);
+
+    transition: 0.3s;
+}
+
+.language-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 20px rgba(0,0,0,0.1);
+}
+
+.language-card h3 {
+    color: var(--royal-blue);
+    font-size: 18px;
+}
+
+
+/* =========================================
+   11. PROFESSIONAL PROJECTS
+========================================= */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background: rgba(255,255,255,0.93);
+
+    padding: 23px;
+
+    border-radius: 12px;
+    border-top: 5px solid var(--gold);
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 9px 24px rgba(0,0,0,0.13);
+}
+
+.project-card h2 {
+    color: var(--royal-blue);
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.project-card h4 {
+    color: var(--blue);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.project-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.project-card ul {
+    padding-left: 20px;
+}
+
+.project-card li {
+    font-size: 13px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.project-tag {
+    display: inline-block;
+
+    background: #e7edfa;
+    color: var(--royal-blue);
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    margin-top: 12px;
+    margin-right: 4px;
+}
+
+
+/* =========================================
+   12. PROFESSIONAL REFEREES
+========================================= */
+
+.referee-card {
+    background: rgba(255,255,255,0.92);
+
     padding: 22px;
+
     border-radius: 11px;
     margin-bottom: 15px;
+
     border-left: 4px solid var(--gold);
 }
 
 .referee-card h3 {
     color: var(--royal-blue);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
-/* ===============================
-   CONTACT
-================================ */
+.referee-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.referee-card a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+
+/* =========================================
+   13. CONTACT INFORMATION
+========================================= */
+
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -438,13 +715,23 @@ body {
 
 .contact-card {
     padding: 25px;
+
     text-align: center;
-    background: rgba(255,255,255,0.9);
+
+    background: rgba(255,255,255,0.92);
+
     border-radius: 12px;
+
     box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+
+    transition: 0.3s;
 }
 
-.contact-card .contact-icon {
+.contact-card:hover {
+    transform: translateY(-5px);
+}
+
+.contact-icon {
     font-size: 30px;
     margin-bottom: 12px;
 }
@@ -465,27 +752,38 @@ body {
     text-decoration: underline;
 }
 
-/* ===============================
-   FOOTER
-================================ */
+
+/* =========================================
+   14. FOOTER
+========================================= */
+
 footer {
     text-align: center;
+
     margin-top: 30px;
     padding: 20px;
+
     color: #444;
     font-size: 12px;
+
+    line-height: 1.8;
 }
 
-/* ===============================
-   RESPONSIVE DESIGN
-================================ */
-@media (max-width: 900px) {
+
+/* =========================================
+   15. RESPONSIVE DESIGN
+========================================= */
+
+@media(max-width: 900px) {
 
     .sidebar {
         position: fixed;
+
         top: 0;
         left: 0;
+
         transform: translateX(-100%);
+
         width: 270px;
         height: 100%;
     }
@@ -496,8 +794,11 @@ footer {
 
     .overlay {
         position: fixed;
+
         inset: 0;
+
         background: rgba(0,0,0,0.5);
+
         z-index: 999;
     }
 
@@ -513,31 +814,42 @@ footer {
 
     .mobile-header {
         display: flex;
+
         position: fixed;
+
         top: 0;
         left: 0;
+
         width: 100%;
         height: 58px;
+
         padding: 0 15px;
+
         align-items: center;
         gap: 15px;
+
         background: var(--royal-blue);
         color: white;
+
         z-index: 900;
+
         box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
 
     .mobile-header button {
         background: var(--gold);
+
         border: none;
         border-radius: 6px;
+
         padding: 8px 13px;
+
         font-size: 20px;
         cursor: pointer;
     }
 
     .mobile-header h3 {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .section {
@@ -547,9 +859,14 @@ footer {
     .skills-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-@media (max-width: 550px) {
+
+@media(max-width: 550px) {
 
     .details-grid,
     .contact-grid {
@@ -565,7 +882,8 @@ footer {
         padding: 12px 7px;
     }
 
-    .skill-card img {
+    .skill-card img,
+    .skill-icon {
         height: 75px;
     }
 
@@ -580,24 +898,71 @@ footer {
     .section-heading h1 {
         font-size: 22px;
     }
+
+    .language-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        padding-left: 20px;
+    }
+
+    .timeline-item {
+        padding: 16px;
+    }
+
+    .timeline-item::before {
+        left: -30px;
+    }
 }
+
+
+/* =========================================
+   16. REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media(prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ===============================
+
+<!-- =========================================
      SIDEBAR
-================================ -->
+========================================= -->
+
 <aside class="sidebar" id="sidebar">
 
     <div>
+
+        <!-- PROFILE -->
         <div class="profile">
-            <div class="profile-avatar">BO</div>
+
+            <div class="profile-avatar">
+                BO
+            </div>
+
             <h2>BOAZ OCHIENG</h2>
+
             <p>ICT PROFESSIONAL</p>
+
         </div>
 
+
+        <!-- NAVIGATION -->
         <ul class="nav">
 
             <li>
@@ -629,6 +994,20 @@ footer {
             </li>
 
             <li>
+                <button data-section="languages">
+                    <span class="nav-icon">🌍</span>
+                    Languages
+                </button>
+            </li>
+
+            <li>
+                <button data-section="projects">
+                    <span class="nav-icon">🚀</span>
+                    Projects
+                </button>
+            </li>
+
+            <li>
                 <button data-section="self">
                     <span class="nav-icon">🤝</span>
                     Referees
@@ -643,36 +1022,69 @@ footer {
             </li>
 
         </ul>
+
     </div>
 
+
+    <!-- SIDEBAR CONTACT -->
     <div class="sidebar-bottom">
+
         <h4>GET IN TOUCH</h4>
-        <a href="tel:+254700886058">📞 +254 700 886 058</a>
-        <a href="mailto:boazkhoinange@gmail.com">✉ Email Me</a>
+
+        <a href="tel:+254700886058">
+            📞 +254 700 886 058
+        </a>
+
+        <a href="mailto:boazkhoinange@gmail.com">
+            ✉ Email Me
+        </a>
+
     </div>
 
 </aside>
 
-<!-- Mobile overlay -->
+
+<!-- MOBILE OVERLAY -->
 <div class="overlay" id="overlay"></div>
 
-<!-- ===============================
+
+
+<!-- =========================================
      MAIN CONTENT
-================================ -->
+========================================= -->
+
 <main class="content">
 
+
+    <!-- MOBILE HEADER -->
     <div class="mobile-header">
-        <button id="toggleBtn" aria-label="Open navigation">☰</button>
+
+        <button id="toggleBtn" aria-label="Open navigation">
+            ☰
+        </button>
+
         <h3>BOAZ OCHIENG | MY ONLINE CV</h3>
+
     </div>
 
-    <!-- PERSONAL DETAILS -->
+
+
+    <!-- =====================================
+         1. PERSONAL DETAILS
+    ====================================== -->
+
     <section id="update" class="section active">
 
         <div class="section-heading">
+
             <h1>BACKGROUND INFORMATION</h1>
-            <p>Personal profile and background details</p>
+
+            <p>
+                Personal profile and background details
+            </p>
+
         </div>
+
 
         <div class="details-grid">
 
@@ -697,52 +1109,146 @@ footer {
             </div>
 
             <div class="detail-card">
-                <span>Languages</span>
-                <strong>English, Kiswahili, Luo</strong>
-            </div>
-
-            <div class="detail-card">
                 <span>Postal Address</span>
                 <strong>P.O. Box 1-40606, Ugunja</strong>
             </div>
 
+            <div class="detail-card">
+                <span>Languages</span>
+                <strong>English, Kiswahili and Luo</strong>
+            </div>
+
         </div>
 
     </section>
 
 
-    <!-- EDUCATION -->
+
+    <!-- =====================================
+         2. ACADEMIC QUALIFICATIONS
+    ====================================== -->
+
     <section id="funds" class="section">
 
         <div class="section-heading">
+
             <h1>ACADEMIC QUALIFICATIONS</h1>
-            <p>Educational background and qualifications</p>
+
+            <p>
+                Educational background, training and qualifications
+            </p>
+
         </div>
+
 
         <div class="timeline">
 
+
+            <!-- KASNEB -->
             <div class="timeline-item">
-                <span class="year">2022 – 2024</span>
-                <h3>Institute of Business Studies</h3>
-                <p>Diploma in Information and Communication Technology</p>
+
+                <span class="year">
+                    January 2026 – December 2026
+                </span>
+
+                <h3>KASNEB</h3>
+
+                <p>
+                    Certified Accounting Management
+                </p>
+
             </div>
 
+
+            <!-- NYS -->
             <div class="timeline-item">
-                <span class="year">2021 – 2022</span>
-                <h3>Ugunja Technical and Vocational College</h3>
-                <p>Certificate in Information and Communication Technology</p>
+
+                <span class="year">
+                    January 2023 – April 2024
+                </span>
+
+                <h3>
+                    Textile and Garment Technology Institute
+                </h3>
+
+                <p>
+                    National Youth Service (NYS) –
+                    ICT Technician Level 6
+                </p>
+
             </div>
 
+
+            <!-- INSTITUTE OF BUSINESS STUDIES -->
             <div class="timeline-item">
-                <span class="year">2014 – 2017</span>
-                <h3>Umina Mixed Secondary School</h3>
-                <p>Kenya Certificate of Secondary Education (KCSE)</p>
+
+                <span class="year">
+                    2022 – 2024
+                </span>
+
+                <h3>
+                    Institute of Business Studies
+                </h3>
+
+                <p>
+                    Diploma in Information and Communication Technology
+                </p>
+
             </div>
 
+
+            <!-- UGANJA TVC -->
             <div class="timeline-item">
-                <span class="year">Primary Education</span>
-                <h3>Ambira Primary School</h3>
-                <p>Kenya Certificate of Primary Education (KCPE)</p>
+
+                <span class="year">
+                    January 2021 – September 2022
+                </span>
+
+                <h3>
+                    Ugunja Technical and Vocational College
+                </h3>
+
+                <p>
+                    Information and Communication Technology (ICT)
+                    Certificate
+                </p>
+
+            </div>
+
+
+            <!-- SECONDARY -->
+            <div class="timeline-item">
+
+                <span class="year">
+                    2013 – 2017
+                </span>
+
+                <h3>
+                    Umina Mixed Secondary School
+                </h3>
+
+                <p>
+                    Kenya Certificate of Secondary Education (KCSE)
+                </p>
+
+            </div>
+
+
+            <!-- PRIMARY -->
+            <div class="timeline-item">
+
+                <span class="year">
+                    2004 – 2013
+                </span>
+
+                <h3>
+                    Ambira Primary School
+                </h3>
+
+                <p>
+                    Kenya Certificate of Primary Education (KCPE)
+                </p>
+
             </div>
 
         </div>
@@ -750,48 +1256,94 @@ footer {
     </section>
 
 
-    <!-- CAREER -->
+
+    <!-- =====================================
+         3. WORK EXPERIENCE
+    ====================================== -->
+
     <section id="postgrad" class="section">
 
         <div class="section-heading">
+
             <h1>WORK EXPERIENCE</h1>
-            <p>Professional experience and responsibilities</p>
+
+            <p>
+                Professional experience and key responsibilities
+            </p>
+
         </div>
 
+
+        <!-- RURALNET -->
         <div class="job-card">
 
             <h2>RuralNet ICT Academy</h2>
-            <div class="job-period">2025 – Present</div>
+
+            <div class="job-period">
+                2025 – Present
+            </div>
 
             <h4>Key Responsibilities</h4>
 
             <ul>
+
                 <li>ICT Technician</li>
+
                 <li>IT Consultant</li>
+
                 <li>Network Administration</li>
-                <li>Software installation, maintenance and upgrades</li>
-                <li>Web development and website maintenance</li>
-                <li>Computer repair and maintenance</li>
+
+                <li>
+                    Software installation, maintenance and upgrades
+                </li>
+
+                <li>
+                    Web development and website maintenance
+                </li>
+
+                <li>
+                    Computer repair and maintenance
+                </li>
+
                 <li>Graphic designing</li>
+
                 <li>Marketing</li>
-                <li>Academic circulars, programmes and policy organisation and planning</li>
+
+                <li>
+                    Academic circulars, programmes and
+                    institutional policy organisation and planning
+                </li>
+
             </ul>
 
         </div>
 
+
+        <!-- SAVIOUR COMPUTER CENTRE -->
         <div class="job-card">
 
             <h2>Saviour Computer Centre</h2>
-            <div class="job-period">2018 – 2020</div>
+
+            <div class="job-period">
+                2018 – 2020
+            </div>
 
             <h4>Key Responsibilities</h4>
 
             <ul>
+
                 <li>Cyber café operations</li>
+
                 <li>Marketing</li>
-                <li>Offering technical support</li>
-                <li>Responding to general client enquiries</li>
+
+                <li>Providing technical support</li>
+
+                <li>
+                    Responding to general client enquiries
+                </li>
+
                 <li>Selling stationery</li>
+
             </ul>
 
         </div>
@@ -799,49 +1351,207 @@ footer {
     </section>
 
 
-    <!-- EXPERTISE -->
+
+    <!-- =====================================
+         4. TECHNICAL EXPERTISE
+    ====================================== -->
+
     <section id="loans" class="section">
 
         <div class="section-heading">
+
             <h1>TECHNICAL EXPERTISE</h1>
-            <p>Key professional skills and areas of competence</p>
+
+            <p>
+                Professional skills and areas of technical competence
+            </p>
+
         </div>
+
 
         <div class="skills-grid">
 
+
+            <!-- HTML -->
             <div class="skill-card">
+
                 <img src="images/HTMLB.png" alt="HTML">
+
                 <h3>HTML</h3>
+
+                <div class="skill-progress">
+
+                    <span>90%</span>
+
+                    <div class="progress-track">
+                        <div class="progress-fill"
+                             style="width:90%">
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
+
+            <!-- CSS -->
             <div class="skill-card">
+
                 <img src="images/CSSB.png" alt="CSS">
+
                 <h3>CSS</h3>
+
+                <div class="skill-progress">
+
+                    <span>80%</span>
+
+                    <div class="progress-track">
+                        <div class="progress-fill"
+                             style="width:80%">
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
+
+            <!-- JAVASCRIPT -->
             <div class="skill-card">
+
                 <img src="images/JSB.png" alt="JavaScript">
+
                 <h3>JavaScript</h3>
+
+                <div class="skill-progress">
+
+                    <span>70%</span>
+
+                    <div class="progress-track">
+                        <div class="progress-fill"
+                             style="width:70%">
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
+
+            <!-- PYTHON -->
             <div class="skill-card">
+
                 <img src="images/pythonb.png" alt="Python">
-                <h3>Python Programming</h3>
+
+                <h3>Python</h3>
+
+                <div class="skill-progress">
+
+                    <span>50%</span>
+
+                    <div class="progress-track">
+                        <div class="progress-fill"
+                             style="width:50%">
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
+
+            <!-- FIREBASE -->
             <div class="skill-card">
-                <img src="images/designer.png" alt="Graphic Designing">
+
+                <div class="skill-icon">
+                    🔥
+                </div>
+
+                <h3>Firebase</h3>
+
+                <div class="skill-progress">
+
+                    <span>80%</span>
+
+                    <div class="progress-track">
+                        <div class="progress-fill"
+                             style="width:80%">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- GRAPHIC DESIGN -->
+            <div class="skill-card">
+
+                <img src="images/designer.png"
+                     alt="Graphic Designing">
+
                 <h3>Graphic Designing</h3>
+
             </div>
 
+
+            <!-- COMPUTER REPAIR -->
             <div class="skill-card">
-                <img src="images/comp-repair.png" alt="Computer Repair">
+
+                <img src="images/comp-repair.png"
+                     alt="Computer Repair">
+
                 <h3>Computer Repair & Maintenance</h3>
+
             </div>
 
+
+            <!-- NETWORKING -->
             <div class="skill-card">
-                <img src="images/networking.jpg" alt="Networking">
+
+                <img src="images/networking.jpg"
+                     alt="Networking">
+
                 <h3>Network Administration</h3>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         5. LANGUAGES
+    ====================================== -->
+
+    <section id="languages" class="section">
+
+        <div class="section-heading">
+
+            <h1>LANGUAGES</h1>
+
+            <p>
+                Languages spoken and used in communication
+            </p>
+
+        </div>
+
+
+        <div class="language-grid">
+
+            <div class="language-card">
+                <h3>🇬🇧 English</h3>
+            </div>
+
+            <div class="language-card">
+                <h3>🇰🇪 Kiswahili</h3>
+            </div>
+
+            <div class="language-card">
+                <h3>Luo</h3>
             </div>
 
         </div>
@@ -849,117 +1559,435 @@ footer {
     </section>
 
 
-    <!-- REFEREES -->
+
+    <!-- =====================================
+         6. PROJECTS AND CONTRIBUTIONS
+    ====================================== -->
+
+    <section id="projects" class="section">
+
+        <div class="section-heading">
+
+            <h1>PROJECTS & PROFESSIONAL CONTRIBUTIONS</h1>
+
+            <p>
+                Selected ICT development, web development
+                and institutional administration projects
+            </p>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+
+            <!-- PROJECT ONE -->
+            <div class="project-card">
+
+                <h2>
+                    Management Information System (M.I.S)
+                </h2>
+
+                <h4>RuralNet ICT Academy</h4>
+
+                <p>
+                    Development of a Management Information System
+                    designed to store, manage and monitor student
+                    records and institutional financial information.
+                </p>
+
+                <strong>Key Features:</strong>
+
+                <ul>
+
+                    <li>
+                        Student registration and records management
+                    </li>
+
+                    <li>
+                        Student fee updates and payment tracking
+                    </li>
+
+                    <li>
+                        Automated receipt generation
+                    </li>
+
+                    <li>
+                        Login, logout and password reset management
+                    </li>
+
+                    <li>
+                        Network renewal date alerts
+                    </li>
+
+                </ul>
+
+                <p>
+                    The system is designed to operate on a local
+                    network to limit exposure to unauthorised
+                    public access.
+                </p>
+
+                <span class="project-tag">
+                    System Development
+                </span>
+
+                <span class="project-tag">
+                    Database Management
+                </span>
+
+            </div>
+
+
+
+            <!-- PROJECT TWO -->
+            <div class="project-card">
+
+                <h2>
+                    Institutional Website Development
+                </h2>
+
+                <h4>RuralNet ICT Academy</h4>
+
+                <p>
+                    Development and maintenance of the institutional
+                    website and its integrated management portals.
+                </p>
+
+                <strong>Key Features:</strong>
+
+                <ul>
+
+                    <li>Staff portal</li>
+
+                    <li>Student portal</li>
+
+                    <li>
+                        Student Management Information System
+                    </li>
+
+                    <li>E-Library system</li>
+
+                    <li>Examination portals</li>
+
+                    <li>Certification resources</li>
+
+                    <li>Student learning resources</li>
+
+                    <li>Staff and management resources</li>
+
+                </ul>
+
+                <span class="project-tag">
+                    Web Development
+                </span>
+
+                <span class="project-tag">
+                    Portal Development
+                </span>
+
+            </div>
+
+
+
+            <!-- PROJECT THREE -->
+            <div class="project-card">
+
+                <h2>
+                    Institutional Administration & Planning
+                </h2>
+
+                <h4>RuralNet Training College</h4>
+
+                <p>
+                    Participation in institutional planning,
+                    administrative organisation and academic
+                    programme development.
+                </p>
+
+                <strong>Key Contributions:</strong>
+
+                <ul>
+
+                    <li>
+                        Development of an institutional strategic plan
+                    </li>
+
+                    <li>
+                        Structuring the institution's administrative policy
+                    </li>
+
+                    <li>
+                        Development of fee structures for accounting courses
+                    </li>
+
+                    <li>
+                        Preparation of academic timetables
+                        for accounting courses
+                    </li>
+
+                </ul>
+
+                <span class="project-tag">
+                    Institutional Planning
+                </span>
+
+                <span class="project-tag">
+                    Academic Administration
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         7. PROFESSIONAL REFEREES
+    ====================================== -->
+
     <section id="self" class="section">
 
         <div class="section-heading">
+
             <h1>PROFESSIONAL REFEREES</h1>
-            <p>Professional references</p>
+
+            <p>
+                Professional references and recommendations
+            </p>
+
         </div>
 
+
+        <!-- REFEREE ONE -->
         <div class="referee-card">
-            <h3>Referee One</h3>
-            <p>Details to be provided.</p>
+
+            <h3>1. Lecturer Juma</h3>
+
+            <p>
+                <strong>Institution:</strong>
+                National Youth Service – Textile and Garment
+                Technology Institute
+            </p>
+
+            <p>
+                <strong>Position:</strong>
+                TGTI Lecturer
+            </p>
+
+            <p>
+                <strong>Telephone:</strong>
+                <a href="tel:+25475970825">
+                    +254 759 708 25
+                </a>
+            </p>
+
         </div>
 
+
+        <!-- REFEREE TWO -->
         <div class="referee-card">
-            <h3>Referee Two</h3>
-            <p>Details to be provided.</p>
+
+            <h3>2. Madam Olivia Alang'o</h3>
+
+            <p>
+                <strong>Position:</strong>
+                Manager, RuralNet ICT Academy
+            </p>
+
+        </div>
+
+
+        <!-- REFEREE THREE -->
+        <div class="referee-card">
+
+            <h3>3. Inspector George Mwatha</h3>
+
+            <p>
+                <strong>Position:</strong>
+                Adjutant – National Youth Service
+            </p>
+
+            <p>
+                <strong>Telephone:</strong>
+                <a href="tel:+254726073515">
+                    +254 726 073 515
+                </a>
+            </p>
+
         </div>
 
     </section>
 
 
-    <!-- CONTACT -->
+
+    <!-- =====================================
+         8. CONTACT INFORMATION
+    ====================================== -->
+
     <section id="contact" class="section">
 
         <div class="section-heading">
+
             <h1>GET IN TOUCH</h1>
-            <p>Feel free to contact me for professional enquiries and opportunities.</p>
+
+            <p>
+                Feel free to contact me for professional enquiries,
+                collaboration and career opportunities.
+            </p>
+
         </div>
+
 
         <div class="contact-grid">
 
+
+            <!-- EMAIL -->
             <div class="contact-card">
-                <div class="contact-icon">📧</div>
+
+                <div class="contact-icon">
+                    📧
+                </div>
+
                 <h3>Email Address</h3>
+
                 <a href="mailto:boazkhoinange@gmail.com">
                     boazkhoinange@gmail.com
                 </a>
+
             </div>
 
+
+            <!-- PHONE -->
             <div class="contact-card">
-                <div class="contact-icon">📞</div>
+
+                <div class="contact-icon">
+                    📞
+                </div>
+
                 <h3>Telephone</h3>
+
                 <a href="tel:+254700886058">
                     +254 700 886 058
                 </a>
+
             </div>
+
 
         </div>
 
     </section>
 
 
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
     <footer>
+
         Copyright © <span id="year"></span>
-        <strong>Boaz Ochieng | Online Curriculum Vitae</strong>
+
+        <strong>
+            Boaz Ochieng | Online Curriculum Vitae
+        </strong>
+
         <br>
+
         All Rights Reserved.
+
     </footer>
+
 
 </main>
 
 
-<!-- ===============================
+
+<!-- =========================================
      JAVASCRIPT
-================================ -->
+========================================= -->
+
 <script>
 
-// ELEMENTS
+
+/* =========================================
+   1. SELECT ELEMENTS
+========================================= */
+
 const sidebar = document.getElementById("sidebar");
+
 const toggleBtn = document.getElementById("toggleBtn");
+
 const overlay = document.getElementById("overlay");
 
 const navButtons = document.querySelectorAll(".nav button");
+
 const sections = document.querySelectorAll(".section");
 
+const content = document.querySelector(".content");
 
-// SWITCH BETWEEN SECTIONS
+
+
+/* =========================================
+   2. SWITCH BETWEEN SECTIONS
+========================================= */
+
 function showSection(sectionId) {
 
     // Hide all sections
     sections.forEach(section => {
+
         section.classList.remove("active");
+
     });
 
+
     // Display selected section
-    const selectedSection = document.getElementById(sectionId);
+    const selectedSection =
+        document.getElementById(sectionId);
 
     if (selectedSection) {
+
         selectedSection.classList.add("active");
+
     }
+
 
     // Update active navigation button
     navButtons.forEach(button => {
+
         button.classList.toggle(
             "active",
             button.dataset.section === sectionId
         );
+
     });
 
-    // Close mobile sidebar
+
+    // Close mobile navigation
     closeSidebar();
 
-    // Start selected section from the top
-    document.querySelector(".content").scrollTo({
+
+    // Return content to the top
+    content.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
+
 }
 
 
-// NAVIGATION EVENTS
+
+/* =========================================
+   3. NAVIGATION BUTTON EVENTS
+========================================= */
+
 navButtons.forEach(button => {
 
     button.addEventListener("click", () => {
@@ -971,43 +1999,69 @@ navButtons.forEach(button => {
 });
 
 
-// OPEN MOBILE SIDEBAR
+
+/* =========================================
+   4. OPEN MOBILE SIDEBAR
+========================================= */
+
 toggleBtn.addEventListener("click", () => {
 
     sidebar.classList.add("open");
+
     overlay.classList.add("show");
 
 });
 
 
-// CLOSE MOBILE SIDEBAR
+
+/* =========================================
+   5. CLOSE MOBILE SIDEBAR
+========================================= */
+
 function closeSidebar() {
 
     sidebar.classList.remove("open");
+
     overlay.classList.remove("show");
 
 }
 
 
-// CLOSE WHEN OVERLAY IS CLICKED
+
+/* =========================================
+   6. CLOSE SIDEBAR WHEN OVERLAY IS CLICKED
+========================================= */
+
 overlay.addEventListener("click", closeSidebar);
 
 
-// CLOSE WITH ESCAPE KEY
+
+/* =========================================
+   7. CLOSE SIDEBAR USING ESCAPE KEY
+========================================= */
+
 document.addEventListener("keydown", event => {
 
     if (event.key === "Escape") {
+
         closeSidebar();
+
     }
 
 });
 
 
-// AUTOMATIC COPYRIGHT YEAR
+
+/* =========================================
+   8. AUTOMATIC COPYRIGHT YEAR
+========================================= */
+
 document.getElementById("year").textContent =
     new Date().getFullYear();
 
+
 </script>
+
 
 </body>
 </html>
