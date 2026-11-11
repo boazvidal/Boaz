@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <p id="greeting">Hey Siri</p>
+    <button onclick="changeGreeting()" style="color: blue; ">Click Me</button>
+
+    <script>
+        function changeGreeting() {
+            document.getElementById("greeting").innerText = "Hello, Otieno!";
+        }
+
+
+
+    let name="Stacy"; // This is a string variable
+    let age=25; // This is a number variable
+    let isStudent=true; // This is a boolean variable
+    let selectedStudent= null; // This is a null variable
+    let id = Symbol("7char"); // This is a symbol variable
+    let vehicle = { make: "Toyota", 
+                    model: "Camry", 
+                    year: 2020,
+                    country: "Michigan" }; // This is an object variable
+    let fruits = ["Apple", "Banana", "Cherry"]; // This is an array variable
+
+    //==================================
+    //OPERATORS
+    //==================================
+
+    // Arithmetic Operators
+    2 + 3; // Addition
+    5 - 2; // Subtraction
+    4 * 2; // Multiplication
+    10 / 2; // Division
+    10 % 3; // Modulus
+
+    //assignment Operators
+    let x = 10; // Assignment
+    x += 5; // Addition assignment
+
+    // Comparison Operators
+    5 === "5"; // Strict equal
+    5 !== "5"; // Strict not equal
+
+    let a > 5; // Greater than
+    console.log(a < 10); // Less than
+
+    // Logical Operators
+    let isAdult = true;
+    let hasLicense = false;
+    console.log(isAdult && hasLicense); // AND
+    console.log(isAdult || hasLicense); // OR
+    console.log(!isAdult); // NOT
+
+    //type operators
+
+    let name = true;
+    console.log(typeof name); // boolean
+
+    </script>
+</body>
+</html>

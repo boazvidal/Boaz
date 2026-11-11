@@ -1,275 +1,1012 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY CV</title>
+<meta name="theme-color" content="#102b69">
+
+<title>Boaz Ochieng | Online CV</title>
+
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+/* ===============================
+   GLOBAL SETTINGS
+================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-  body {
-    display: flex;
+:root {
+    --royal-blue: #102b69;
+    --blue: #073bba;
+    --gold: #f9b233;
+    --white: #ffffff;
+    --dark: #172033;
+    --muted: #667085;
+    --glass: rgba(255,255,255,0.87);
+}
+
+body {
     height: 100vh;
+    display: flex;
     overflow: hidden;
-  }
+    color: var(--dark);
+}
 
-  /* Sidebar */
-  .sidebar {
-    width: 240px;
-    background: url(images/royalblue.jpg); /* HELB green */
+/* ===============================
+   SIDEBAR
+================================ */
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    height: 100vh;
+    background:
+        linear-gradient(rgba(8,29,83,0.90),
+                        rgba(8,29,83,0.96)),
+        url("images/royalblue.jpg");
+
+    background-size: cover;
+    background-position: center;
+
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: left 0.3s ease;
-  }
+    z-index: 1000;
+    transition: transform 0.35s ease;
+}
 
-  .nav {
-    list-style: none;
-    padding: 20px 0;
-  }
+.profile {
+    text-align: center;
+    padding: 35px 15px 25px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
 
-  .nav li {
-    padding: 15px 25px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .nav li:hover {
-    background: rgba(255,255,255,0.1);
-  }
-
-  .nav li.active {
-    background: #f9b233; /* highlight color */
-    color: #000;
+.profile-avatar {
+    width: 85px;
+    height: 85px;
+    margin: auto;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
     font-weight: bold;
-  }
+    color: var(--royal-blue);
+    background: linear-gradient(135deg, white, var(--gold));
+    border: 4px solid rgba(255,255,255,0.3);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
 
-  .bottom {
+.profile h2 {
+    margin-top: 15px;
+    font-size: 19px;
+    letter-spacing: 1px;
+}
+
+.profile p {
+    font-size: 12px;
+    color: #d5dfff;
+    margin-top: 6px;
+}
+
+.nav {
+    list-style: none;
+    padding: 20px 12px;
+    flex: 1;
+}
+
+.nav li {
+    margin: 7px 0;
+}
+
+.nav button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 16px;
+    color: #e6ebff;
+    background: transparent;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav button:hover {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    transform: translateX(4px);
+}
+
+.nav button.active {
+    background: var(--gold);
+    color: #111;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.nav-icon {
+    font-size: 19px;
+    width: 22px;
+    text-align: center;
+}
+
+.sidebar-bottom {
     padding: 20px;
     border-top: 1px solid rgba(255,255,255,0.2);
-  }
+}
 
-  /* Main Content */
-  .content {
-    flex: 1;
-    background: url(images/white1.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 20px;
-    overflow-y: auto;
-    position: relative;
-  }
+.sidebar-bottom h4 {
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
 
-  /* Toggle Button for Small Screens */
-  .toggle-btn {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #00723f;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    font-size: 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    z-index: 999;
-  }
-
-  /* Section Styling */
-  .section {
-    display: none;
-    background: url(images/whitered.png); /*rgb(209, 70, 70);*/
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-bottom: 10px solid blue;
-  }
-
-  .section.active {
+.sidebar-bottom a {
     display: block;
-  }
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 10px 0;
+}
 
-  .section h1 {
-    color: blue;
-    padding: 1rem;
-    border-bottom: 5px solid black;
+.sidebar-bottom a:hover {
+    color: var(--gold);
+}
 
-  }
+/* ===============================
+   MAIN CONTENT
+================================ */
+.content {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 35px;
+    position: relative;
 
-  .section strong p pre {
-    font-family: 'arial black';
-    padding: 0.3rem;
-  }
+    background:
+        linear-gradient(rgba(255,255,255,0.30),
+                        rgba(255,255,255,0.30)),
+        url("images/white1.jpg");
 
-  footer {
-    text-align: center;
-    color: #555;
-    font-size: 14px;
-    margin-top: 40px;
-  }
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
-  /* --- RESPONSIVE --- */
-  @media (max-width: 900px) {
-    body {
-      flex-direction: column;
+/* Mobile navigation controls */
+.mobile-header {
+    display: none;
+}
+
+.overlay {
+    display: none;
+}
+
+/* ===============================
+   SECTIONS
+================================ */
+.section {
+    display: none;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 16px;
+
+    background:
+        linear-gradient(rgba(255,255,255,0.87),
+                        rgba(255,255,255,0.87)),
+        url("images/whitered.png");
+
+    background-size: cover;
+    background-position: center;
+
+    border-bottom: 7px solid var(--blue);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    animation: appear 0.4s ease;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
     }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-heading {
+    padding-bottom: 17px;
+    margin-bottom: 25px;
+    border-bottom: 3px solid var(--gold);
+}
+
+.section-heading h1 {
+    font-size: clamp(23px, 3vw, 30px);
+    color: var(--royal-blue);
+    margin-bottom: 8px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ===============================
+   PERSONAL DETAILS
+================================ */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.detail-card {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(16,43,105,0.10);
+    padding: 19px;
+    border-radius: 11px;
+    transition: 0.3s;
+}
+
+.detail-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 7px 20px rgba(0,0,0,0.09);
+}
+
+.detail-card span {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.detail-card strong {
+    font-size: 15px;
+    color: var(--royal-blue);
+    overflow-wrap: anywhere;
+}
+
+/* ===============================
+   EDUCATION TIMELINE
+================================ */
+.timeline {
+    border-left: 3px solid var(--blue);
+    margin-left: 10px;
+    padding-left: 25px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+    padding: 20px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 3px solid var(--blue);
+    left: -35px;
+    top: 24px;
+}
+
+.year {
+    display: inline-block;
+    background: var(--royal-blue);
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.timeline-item h3 {
+    font-size: 17px;
+    color: var(--royal-blue);
+    margin-bottom: 7px;
+}
+
+.timeline-item p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* ===============================
+   WORK EXPERIENCE
+================================ */
+.job-card {
+    background: rgba(255,255,255,0.9);
+    padding: 23px;
+    margin-bottom: 22px;
+    border-radius: 12px;
+    border-left: 5px solid var(--gold);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.job-card h2 {
+    color: var(--royal-blue);
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.job-period {
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 17px;
+}
+
+.job-card h4 {
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.job-card ul {
+    padding-left: 22px;
+}
+
+.job-card li {
+    margin-bottom: 9px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* ===============================
+   EXPERTISE / SKILLS
+================================ */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.skill-card {
+    background: rgba(255,255,255,0.9);
+    padding: 17px;
+    text-align: center;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    border-color: var(--gold);
+}
+
+.skill-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.skill-card h3 {
+    font-size: 14px;
+    color: var(--royal-blue);
+}
+
+/* ===============================
+   REFEREES
+================================ */
+.referee-card {
+    background: rgba(255,255,255,0.9);
+    padding: 22px;
+    border-radius: 11px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--gold);
+}
+
+.referee-card h3 {
+    color: var(--royal-blue);
+    margin-bottom: 8px;
+}
+
+/* ===============================
+   CONTACT
+================================ */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.contact-card {
+    padding: 25px;
+    text-align: center;
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.contact-card .contact-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.contact-card h3 {
+    color: var(--royal-blue);
+    margin-bottom: 10px;
+}
+
+.contact-card a {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.contact-card a:hover {
+    text-decoration: underline;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    color: #444;
+    font-size: 12px;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================ */
+@media (max-width: 900px) {
 
     .sidebar {
-      position: fixed;
-      left: -250px;
-      top: 0;
-      height: 100%;
-      z-index: 1000;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        width: 270px;
+        height: 100%;
     }
 
     .sidebar.open {
-      left: 0;
+        transform: translateX(0);
     }
 
-    .toggle-btn {
-      display: block;
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+
+    .overlay.show {
+        display: block;
     }
 
     .content {
-      padding-top: 60px;
+        width: 100%;
+        padding: 15px;
+        padding-top: 75px;
     }
-  }
+
+    .mobile-header {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 58px;
+        padding: 0 15px;
+        align-items: center;
+        gap: 15px;
+        background: var(--royal-blue);
+        color: white;
+        z-index: 900;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .mobile-header button {
+        background: var(--gold);
+        border: none;
+        border-radius: 6px;
+        padding: 8px 13px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .mobile-header h3 {
+        font-size: 15px;
+    }
+
+    .section {
+        padding: 20px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 550px) {
+
+    .details-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .skill-card {
+        padding: 12px 7px;
+    }
+
+    .skill-card img {
+        height: 75px;
+    }
+
+    .skill-card h3 {
+        font-size: 12px;
+    }
+
+    .section {
+        padding: 17px;
+    }
+
+    .section-heading h1 {
+        font-size: 22px;
+    }
+}
 </style>
 </head>
+
 <body>
 
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <ul class="nav">
-      <li class="active" onclick="showSection('update', event)">Personal Details</li>
-      <li onclick="showSection('funds', event)">Education</li>
-      <li onclick="showSection('postgrad', event)">Career</li>
-      <li onclick="showSection('loans', event)">Expertise</li>
-      <li onclick="showSection('self', event)">Referees</li>
-    </ul>
-    <div class="bottom">
-      <h4>CONTACT</h4>
-      <p onclick="showSection('contact', event)" style="cursor:pointer;">📞 Contact Me</p>
-    </div>
-  </div>
+<!-- ===============================
+     SIDEBAR
+================================ -->
+<aside class="sidebar" id="sidebar">
 
-  <!-- Content -->
-  <div class="content">
-    <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
+    <div>
+        <div class="profile">
+            <div class="profile-avatar">BO</div>
+            <h2>BOAZ OCHIENG</h2>
+            <p>ICT PROFESSIONAL</p>
+        </div>
 
-    <div id="update" class="section active">
-      <h1>BACKGROUND INFORMATION</h1>
-      <strong>
-      <p><pre>NAME:            BOAZ OCHIENG</pre></p>
-      <p><pre>GENDER:          MALE</p></pre>
-      <p><pre>DATE OF BIRTH:   24/09/1999</pre></p>
-      <p><pre>NATIONALITY:     KENYAN</pre></p>
-      <p><pre>LANGUAGES:       ENGLISH, KISWAHILI, LUO</pre></p>
-      <P><pre>BOX ADRESS:      P. O. BOX 1-40606, UGUNJA</pre></P>
-      </strong>
-    </div>
+        <ul class="nav">
 
-    <div id="funds" class="section">
-      <h1>ACADEMIC QUALIFICATION</h1>
-      <strong>
-      <P><pre>2022-2024:       Institute Of Business studies</pre></P>
-      <P><pre>                          Diploma in Information and Communication Technology</pre></P>
-      <P><pre>2021-2022:       Ugunja Technical and Vocational College</pre></P>
-      <P><pre>                          Certificate in Information and Communication Technology</pre></P>
-      <P><pre>2014-2017:       Umina Mixed Secondary School</pre></P>
-      <P><pre>                          Kenya Certificate of Secondary Education (KCSE)</pre></P>
-      <P><pre>2021-2022:       Ambira Primary School</pre></P>
-      <P><pre>                          Kenya Certificate of Primary Education</pre></P>
-      </strong>
-    </div>
+            <li>
+                <button class="active" data-section="update">
+                    <span class="nav-icon">👤</span>
+                    Personal Details
+                </button>
+            </li>
 
-    <div id="postgrad" class="section">
-      <h1>WORK EXPERIENCE</h1>
-      <h2><pre>2025 - Now:       Ruralnet ICT Academy</pre></h2>
-      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Responsibilities</strong><pre></p>
-      <P><pre>                          ICT Technician</pre></P>
-      <P><pre>                          I.T Consultant</pre></P>
-      <P><pre>                          Network Administrator</pre></P>
-      <P><pre>                          Software Installation, Maintenance and Upgrades</pre></P>
-      <P><pre>                          Web Development and site maintenance</pre></P>
-      <P><pre>                          Computer Repair and Maintenance</pre></P>
-      <P><pre>                          Graphic Designing</pre></P>
-      <P><pre>                          Marketing</pre></P>
-      <P><pre>                          Academic circulars, programmes and Policy organizer/Planner</pre></P>
+            <li>
+                <button data-section="funds">
+                    <span class="nav-icon">🎓</span>
+                    Education
+                </button>
+            </li>
 
-      <h2><pre>2018 - 2020:       Saviour Computer Centre</pre></h2>
-      <P style="border-bottom: 3px solid blue; font-family: 'Times New Roman';"><strong>Responsibilities</strong><pre></p>
-      <P><pre>                          Cyber Operator</pre></P>
-      <P><pre>                          MArketing</pre></P>
-      <P><pre>                          Offering technical support</pre></P>
-      <P><pre>                          Responding to general querueries by clients</pre></P>
-      <P><pre>                          Selling stationeries</pre></P>
+            <li>
+                <button data-section="postgrad">
+                    <span class="nav-icon">💼</span>
+                    Career
+                </button>
+            </li>
+
+            <li>
+                <button data-section="loans">
+                    <span class="nav-icon">💻</span>
+                    Expertise
+                </button>
+            </li>
+
+            <li>
+                <button data-section="self">
+                    <span class="nav-icon">🤝</span>
+                    Referees
+                </button>
+            </li>
+
+            <li>
+                <button data-section="contact">
+                    <span class="nav-icon">📞</span>
+                    Contact Me
+                </button>
+            </li>
+
+        </ul>
     </div>
 
-    <div id="loans" class="section">
-      <h1>Major skilled areas</h1>
-      <p><strong> Markup Language (HTML)</strong></p>
-      <img src="images/HTMLB.png">
-
-      <p><strong>Cascaded Stylesheet (CSS)</strong></p>
-      <img src="images/CSSB.png">
-
-      <p><strong>Javascript</strong></p>
-      <img src="images/JSB.png">
-
-      <p><strong>Python</strong></p>
-      <img src="images/pythonb.png">
-
-      <p><strong>Graphic Designing</strong></p>
-      <img src="images/designer.png">
-
-      <p><strong>Computer Repair & Maintenance</strong></p>
-      <img src="images/comp-repair.png">
-
-      <p><strong>Network Admin</strong></p>
-      <img src="images/networking.jpg"
-      
+    <div class="sidebar-bottom">
+        <h4>GET IN TOUCH</h4>
+        <a href="tel:+254700886058">📞 +254 700 886 058</a>
+        <a href="mailto:boazkhoinange@gmail.com">✉ Email Me</a>
     </div>
 
-    <div id="self" class="section">
-      <h1>REFEREES</h1>
-      <p>1, 2, ...</p>
+</aside>
+
+<!-- Mobile overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ===============================
+     MAIN CONTENT
+================================ -->
+<main class="content">
+
+    <div class="mobile-header">
+        <button id="toggleBtn" aria-label="Open navigation">☰</button>
+        <h3>BOAZ OCHIENG | MY ONLINE CV</h3>
     </div>
 
-    <div id="contact" class="section">
-      <h1>Contact info</h1>
-      <p>Email: boazkhoinange@gmail.com</p>
-      <p>Phone: +254 700886058</p>
-    </div>
+    <!-- PERSONAL DETAILS -->
+    <section id="update" class="section active">
+
+        <div class="section-heading">
+            <h1>BACKGROUND INFORMATION</h1>
+            <p>Personal profile and background details</p>
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-card">
+                <span>Full Name</span>
+                <strong>BOAZ OCHIENG</strong>
+            </div>
+
+            <div class="detail-card">
+                <span>Gender</span>
+                <strong>Male</strong>
+            </div>
+
+            <div class="detail-card">
+                <span>Date of Birth</span>
+                <strong>24 September 1999</strong>
+            </div>
+
+            <div class="detail-card">
+                <span>Nationality</span>
+                <strong>Kenyan</strong>
+            </div>
+
+            <div class="detail-card">
+                <span>Languages</span>
+                <strong>English, Kiswahili, Luo</strong>
+            </div>
+
+            <div class="detail-card">
+                <span>Postal Address</span>
+                <strong>P.O. Box 1-40606, Ugunja</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- EDUCATION -->
+    <section id="funds" class="section">
+
+        <div class="section-heading">
+            <h1>ACADEMIC QUALIFICATIONS</h1>
+            <p>Educational background and qualifications</p>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <span class="year">2022 – 2024</span>
+                <h3>Institute of Business Studies</h3>
+                <p>Diploma in Information and Communication Technology</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="year">2021 – 2022</span>
+                <h3>Ugunja Technical and Vocational College</h3>
+                <p>Certificate in Information and Communication Technology</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="year">2014 – 2017</span>
+                <h3>Umina Mixed Secondary School</h3>
+                <p>Kenya Certificate of Secondary Education (KCSE)</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="year">Primary Education</span>
+                <h3>Ambira Primary School</h3>
+                <p>Kenya Certificate of Primary Education (KCPE)</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CAREER -->
+    <section id="postgrad" class="section">
+
+        <div class="section-heading">
+            <h1>WORK EXPERIENCE</h1>
+            <p>Professional experience and responsibilities</p>
+        </div>
+
+        <div class="job-card">
+
+            <h2>RuralNet ICT Academy</h2>
+            <div class="job-period">2025 – Present</div>
+
+            <h4>Key Responsibilities</h4>
+
+            <ul>
+                <li>ICT Technician</li>
+                <li>IT Consultant</li>
+                <li>Network Administration</li>
+                <li>Software installation, maintenance and upgrades</li>
+                <li>Web development and website maintenance</li>
+                <li>Computer repair and maintenance</li>
+                <li>Graphic designing</li>
+                <li>Marketing</li>
+                <li>Academic circulars, programmes and policy organisation and planning</li>
+            </ul>
+
+        </div>
+
+        <div class="job-card">
+
+            <h2>Saviour Computer Centre</h2>
+            <div class="job-period">2018 – 2020</div>
+
+            <h4>Key Responsibilities</h4>
+
+            <ul>
+                <li>Cyber café operations</li>
+                <li>Marketing</li>
+                <li>Offering technical support</li>
+                <li>Responding to general client enquiries</li>
+                <li>Selling stationery</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <!-- EXPERTISE -->
+    <section id="loans" class="section">
+
+        <div class="section-heading">
+            <h1>TECHNICAL EXPERTISE</h1>
+            <p>Key professional skills and areas of competence</p>
+        </div>
+
+        <div class="skills-grid">
+
+            <div class="skill-card">
+                <img src="images/HTMLB.png" alt="HTML">
+                <h3>HTML</h3>
+            </div>
+
+            <div class="skill-card">
+                <img src="images/CSSB.png" alt="CSS">
+                <h3>CSS</h3>
+            </div>
+
+            <div class="skill-card">
+                <img src="images/JSB.png" alt="JavaScript">
+                <h3>JavaScript</h3>
+            </div>
+
+            <div class="skill-card">
+                <img src="images/pythonb.png" alt="Python">
+                <h3>Python Programming</h3>
+            </div>
+
+            <div class="skill-card">
+                <img src="images/designer.png" alt="Graphic Designing">
+                <h3>Graphic Designing</h3>
+            </div>
+
+            <div class="skill-card">
+                <img src="images/comp-repair.png" alt="Computer Repair">
+                <h3>Computer Repair & Maintenance</h3>
+            </div>
+
+            <div class="skill-card">
+                <img src="images/networking.jpg" alt="Networking">
+                <h3>Network Administration</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REFEREES -->
+    <section id="self" class="section">
+
+        <div class="section-heading">
+            <h1>PROFESSIONAL REFEREES</h1>
+            <p>Professional references</p>
+        </div>
+
+        <div class="referee-card">
+            <h3>Referee One</h3>
+            <p>Details to be provided.</p>
+        </div>
+
+        <div class="referee-card">
+            <h3>Referee Two</h3>
+            <p>Details to be provided.</p>
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+
+        <div class="section-heading">
+            <h1>GET IN TOUCH</h1>
+            <p>Feel free to contact me for professional enquiries and opportunities.</p>
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>Email Address</h3>
+                <a href="mailto:boazkhoinange@gmail.com">
+                    boazkhoinange@gmail.com
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">📞</div>
+                <h3>Telephone</h3>
+                <a href="tel:+254700886058">
+                    +254 700 886 058
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
 
     <footer>
-      Copyright © 2025 <strong>My Online Curiculum vitae</strong>. 
+        Copyright © <span id="year"></span>
+        <strong>Boaz Ochieng | Online Curriculum Vitae</strong>
+        <br>
+        All Rights Reserved.
     </footer>
-  </div>
 
+</main>
+
+
+<!-- ===============================
+     JAVASCRIPT
+================================ -->
 <script>
-  // Switch sections
-  function showSection(id, event) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
 
-    document.querySelectorAll('.nav li').forEach(li => li.classList.remove('active'));
-    event.target.classList.add('active');
+// ELEMENTS
+const sidebar = document.getElementById("sidebar");
+const toggleBtn = document.getElementById("toggleBtn");
+const overlay = document.getElementById("overlay");
 
-    // close sidebar on small screens
-    document.getElementById('sidebar').classList.remove('open');
-  }
+const navButtons = document.querySelectorAll(".nav button");
+const sections = document.querySelectorAll(".section");
 
-  // Toggle sidebar for small screens
-  const toggleBtn = document.getElementById('toggleBtn');
-  const sidebar = document.getElementById('sidebar');
 
-  toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-  });
+// SWITCH BETWEEN SECTIONS
+function showSection(sectionId) {
+
+    // Hide all sections
+    sections.forEach(section => {
+        section.classList.remove("active");
+    });
+
+    // Display selected section
+    const selectedSection = document.getElementById(sectionId);
+
+    if (selectedSection) {
+        selectedSection.classList.add("active");
+    }
+
+    // Update active navigation button
+    navButtons.forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.section === sectionId
+        );
+    });
+
+    // Close mobile sidebar
+    closeSidebar();
+
+    // Start selected section from the top
+    document.querySelector(".content").scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+// NAVIGATION EVENTS
+navButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        showSection(button.dataset.section);
+
+    });
+
+});
+
+
+// OPEN MOBILE SIDEBAR
+toggleBtn.addEventListener("click", () => {
+
+    sidebar.classList.add("open");
+    overlay.classList.add("show");
+
+});
+
+
+// CLOSE MOBILE SIDEBAR
+function closeSidebar() {
+
+    sidebar.classList.remove("open");
+    overlay.classList.remove("show");
+
+}
+
+
+// CLOSE WHEN OVERLAY IS CLICKED
+overlay.addEventListener("click", closeSidebar);
+
+
+// CLOSE WITH ESCAPE KEY
+document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+        closeSidebar();
+    }
+
+});
+
+
+// AUTOMATIC COPYRIGHT YEAR
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
 </script>
 
 </body>
