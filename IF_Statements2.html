@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Grade Checker</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #0f172a,
+                #1e3a8a,
+                #312e81
+            );
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 35px;
+
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 22px;
+
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+
+            color: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+
+            background: rgba(255,255,255,0.12);
+            color: white;
+
+            font-size: 15px;
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        input::placeholder {
+            color: #cbd5e1;
+        }
+
+        input:focus {
+            border-color: #60a5fa;
+            background: rgba(255,255,255,0.18);
+            box-shadow: 0 0 0 3px rgba(96,165,250,0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #3b82f6,
+                #6366f1
+            );
+
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59,130,246,0.4);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+
+            background: rgba(255,255,255,0.12);
+            border-radius: 12px;
+
+            text-align: center;
+            display: none;
+
+            animation: appear 0.5s ease;
+        }
+
+        #result h2 {
+            font-size: 30px;
+            margin: 10px 0;
+            color: #86efac;
+        }
+
+        #result p {
+            line-height: 1.7;
+            color: #e2e8f0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #cbd5e1;
+            font-size: 12px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            .header h1 {
+                font-size: 23px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <div class="icon">🎓</div>
+
+            <h1>Student Grade Checker</h1>
+
+            <p>Enter your details to evaluate your performance.</p>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Student Name</label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+            >
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Examination Marks</label>
+
+            <input
+                type="number"
+                id="marks"
+                placeholder="Enter marks (0 - 100)"
+                min="0"
+                max="100"
+            >
+
+        </div>
+
+        <button onclick="checkGrade()">
+            Evaluate Performance →
+        </button>
+
+        <div id="result"></div>
+
+        <div class="footer">
+            © 2026 Academic Portal | Powered by JavaScript
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function checkGrade() {
+
+            let name = document.getElementById("name").value.trim();
+
+            let marksInput = document.getElementById("marks").value;
+
+            let marks = Number(marksInput);
+
+            let result = document.getElementById("result");
+
+
+            if (name === "" || marksInput === "" ||
+                marks < 0 || marks > 100) {
+
+                result.style.display = "block";
+
+                result.innerHTML =
+                    "<p style='color:#fca5a5;'>Please enter valid details.</p>";
+
+            }
+
+            else if (marks >= 80) {
+
+                result.style.display = "block";
+
+                result.innerHTML = `
+                    <p>Dear ${name}, your grade is:</p>
+                    <h2>A</h2>
+                    <p>Excellent Performance! 🌟 </p>
+                    <p>Marks: ${marks}%</p>
+                `;
+            }
+
+            else if (marks >= 70) {
+
+                result.style.display = "block";
+
+                result.innerHTML = `
+                    <p>Dear ${name}, your grade is:</p>
+                    <h2>B</h2>
+                    <p>Very Good Performance!</p>
+                    <p>Marks: ${marks}%</p>
+                `;
+
+            }
+            else if (marks >= 60) {
+
+                result.style.display = "block";
+
+                result.innerHTML = `
+                    <p>Dear ${name}, your grade is:</p>
+                    <h2>C</h2>
+                    <p>Good Performance!</p>
+                    <p>Marks: ${marks}%</p>
+                `;
+            }
+
+            else if (marks >= 50) {
+
+                result.style.display = "block";
+
+                result.innerHTML = `
+                    <p>Dear ${name}, your grade is:</p>
+                    <h2>D</h2>
+                    <p>Fair Performance!</p>
+                    <p>Marks: ${marks}%</p>
+                `;
+
+            }
+
+            else {
+
+                result.style.display = "block";
+
+                result.innerHTML = `
+                    <p>Dear ${name}, your grade is:</p>
+                    <h2>FAIL</h2>
+                    <p>Keep practising. You can improve!</p>
+                    <p>Marks: ${marks}%</p>
+                `;
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

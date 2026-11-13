@@ -128,22 +128,17 @@ body {
 
 .nav button {
     width: 100%;
-
     display: flex;
     align-items: center;
     gap: 14px;
-
     padding: 13px 15px;
-
     color: #e6ebff;
     background: transparent;
     border: none;
     border-radius: 9px;
-
     font-size: 14px;
     text-align: left;
     cursor: pointer;
-
     transition: 0.3s;
 }
 
@@ -1797,13 +1792,10 @@ footer {
                 <strong>Position:</strong>
                 Manager, RuralNet ICT Academy
             </p>
-
         </div>
-
 
         <!-- REFEREE THREE -->
         <div class="referee-card">
-
             <h3>3. Inspector George Mwatha</h3>
 
             <p>
@@ -1831,237 +1823,147 @@ footer {
     <section id="contact" class="section">
 
         <div class="section-heading">
-
             <h1>GET IN TOUCH</h1>
-
             <p>
                 Feel free to contact me for professional enquiries,
                 collaboration and career opportunities.
             </p>
 
         </div>
-
-
         <div class="contact-grid">
-
-
             <!-- EMAIL -->
             <div class="contact-card">
 
                 <div class="contact-icon">
                     📧
                 </div>
-
                 <h3>Email Address</h3>
-
                 <a href="mailto:boazkhoinange@gmail.com">
                     boazkhoinange@gmail.com
                 </a>
-
             </div>
-
 
             <!-- PHONE -->
             <div class="contact-card">
-
                 <div class="contact-icon">
                     📞
                 </div>
-
                 <h3>Telephone</h3>
-
                 <a href="tel:+254700886058">
                     +254 700 886 058
                 </a>
-
             </div>
-
-
         </div>
-
     </section>
-
-
 
     <!-- =====================================
          FOOTER
     ====================================== -->
-
     <footer>
-
         Copyright © <span id="year"></span>
-
         <strong>
             Boaz Ochieng | Online Curriculum Vitae
         </strong>
-
         <br>
-
         All Rights Reserved.
-
     </footer>
-
-
 </main>
-
-
 
 <!-- =========================================
      JAVASCRIPT
 ========================================= -->
 
 <script>
-
-
 /* =========================================
    1. SELECT ELEMENTS
 ========================================= */
-
 const sidebar = document.getElementById("sidebar");
-
 const toggleBtn = document.getElementById("toggleBtn");
-
 const overlay = document.getElementById("overlay");
-
 const navButtons = document.querySelectorAll(".nav button");
-
 const sections = document.querySelectorAll(".section");
-
 const content = document.querySelector(".content");
-
 
 
 /* =========================================
    2. SWITCH BETWEEN SECTIONS
 ========================================= */
-
 function showSection(sectionId) {
 
     // Hide all sections
     sections.forEach(section => {
-
         section.classList.remove("active");
-
     });
-
 
     // Display selected section
     const selectedSection =
         document.getElementById(sectionId);
-
     if (selectedSection) {
-
         selectedSection.classList.add("active");
-
     }
-
-
     // Update active navigation button
     navButtons.forEach(button => {
-
         button.classList.toggle(
             "active",
             button.dataset.section === sectionId
         );
-
     });
-
 
     // Close mobile navigation
     closeSidebar();
-
-
     // Return content to the top
     content.scrollTo({
-
         top: 0,
-
         behavior: "smooth"
-
     });
-
 }
-
-
 
 /* =========================================
    3. NAVIGATION BUTTON EVENTS
 ========================================= */
-
 navButtons.forEach(button => {
-
     button.addEventListener("click", () => {
 
         showSection(button.dataset.section);
-
     });
-
 });
-
-
 
 /* =========================================
    4. OPEN MOBILE SIDEBAR
 ========================================= */
-
 toggleBtn.addEventListener("click", () => {
-
     sidebar.classList.add("open");
-
     overlay.classList.add("show");
-
 });
 
-
-
-/* =========================================
+/* ========================================
    5. CLOSE MOBILE SIDEBAR
 ========================================= */
-
 function closeSidebar() {
-
     sidebar.classList.remove("open");
-
     overlay.classList.remove("show");
-
 }
-
-
 
 /* =========================================
    6. CLOSE SIDEBAR WHEN OVERLAY IS CLICKED
 ========================================= */
-
 overlay.addEventListener("click", closeSidebar);
-
-
 
 /* =========================================
    7. CLOSE SIDEBAR USING ESCAPE KEY
 ========================================= */
-
 document.addEventListener("keydown", event => {
-
     if (event.key === "Escape") {
-
         closeSidebar();
-
     }
-
 });
-
-
 
 /* =========================================
    8. AUTOMATIC COPYRIGHT YEAR
 ========================================= */
-
 document.getElementById("year").textContent =
     new Date().getFullYear();
-
-
 </script>
-
 
 </body>
 </html>
